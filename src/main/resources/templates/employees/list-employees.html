@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layouts :: head"></head>
+
+<body>
+
+<nav th:replace="layouts :: navbar"></nav>
+
+<div class="container">
+    <hr>
+    <!--  Add New Employee Button -->
+    <a th:href="@{/employees/new}"
+       class="btn btn-primary btn-sm mb-3">
+        Add Employee
+    </a>
+    <br>
+
+    <table class="table table-bordered table-striped tableUpdate" id="hiddenTable" th:style="${hidden}">
+        <thead class="thead-dark">
+        <tr>
+            <th>First Name (update)</th>
+            <th>Last Name (update)</th>
+            <th>Email (update)</th>
+            <th>Update</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr class="rowForUpdate">
+                <form th:action="@{/employees/updateNow}" th:object="${employee}" method="get">
+                    <input type="hidden" th:field="${employee.employeeId}">
+                    <td>
+                        <input type="text" th:placeholder="${employee.firstName}" th:field="${employee.firstName}">
+                    </td>
+                    <td>
+                        <input type="text" th:placeholder="${employee.lastName}" th:field="${employee.lastName}">
+                    </td>
+                    <td>
+                        <input type="text" th:placeholder="${employee.email}" th:field="${employee.email}">
+                    </td>
+                    <td>
+                        <button class="btn btn-warning btn-sm mb-3" type="submit">Update Employee</button>
+                    </td>
+                </form>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+
+
+        <tr th:each="aEmployee : ${employees}">
+            <td th:text="${aEmployee.firstName}"></td>
+            <td th:text="${aEmployee.lastName}"></td>
+            <td th:text="${aEmployee.email}"></td>
+            <td>
+                <a th:href="@{/employees/update(id=${aEmployee.employeeId})}"
+                   class="btn btn-info btn-sm showHiddenTable">Update</a>
+
+                <!--        <a th:href="@{/employees/delete(id=${aEmployee.employeeId})}"-->
+                <a th:href="@{/employees/delete(id=${aEmployee.employeeId})}"
+                   class="btn btn-danger btn-sm"
+                   onClick="if (!(confirm('Are you sure you want to delete this employee?'))) return false">
+                    Delete
+                </a>
+
+            </td>
+        </tr>
+
+
+        </tbody>
+
+    </table>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+        integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

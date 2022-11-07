@@ -1,0 +1,26 @@
+
+input, textarea, select {
+width: 300px;
+}
+
+thead {
+background: black;
+color: white;
+}
+
+nav {
+border-bottom: 1px solid black;
+margin-bottom: 10px;
+}
+
+nav div img {
+margin-right: 20px;
+}
+
+ul > li >a:hover {
+color: black;
+}
+
+.tableUpdate input{
+width: 100px;
+}
